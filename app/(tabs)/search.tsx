@@ -1,10 +1,66 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import MovieCard from '@/Components/movieCard'
+import SearchBar from '@/Components/searchBar'
+import { icons } from '@/constants/icons'
+import { images } from '@/constants/images'
+import { fetchMovies } from '@/services/api'
+import useFetch from '@/services/useFetch'
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native'
 
 const search = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const { data: movies, loading: movieLoading, error: moviesError, refetch: loadMovies, reset } = useFetch(() => fetchMovies({
+    query: searchQuery
+  }), false)
+
+  useEffect(() => {
+    const func = async () => {
+      if (searchQuery.trim()) {
+        await loadMovies();
+      } else {
+        reset()
+      }
+    }
+    func();
+  }, [searchQuery])
+
+
   return (
-    <View>
-      <Text>search</Text>
+    <View className='bg-primary flex-1'>
+      <Image className='w-full absolute flex-1 z-0' resizeMode='cover' source={images.bg} />
+
+      <FlatList data={movies} renderItem={({ item }) => <MovieCard {...item} />}
+        keyExtractor={(item) => item.id.toString()}
+        className='px-5'
+        numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: 'center',
+          gap: 20,
+          marginVertical: 10
+        }}
+        contentContainerStyle={{
+          paddingBottom: 100
+        }}
+        ListHeaderComponent={
+          <>
+            <View>
+              <Image source={icons.logo} className="mx-auto mt-20 mb-10 w-12 h-10" />
+
+            </View>
+            <View>
+              <SearchBar placeholder="Search for a movie" value={searchQuery} onChangeText={(text: string) => setSearchQuery(text)} />
+            </View>
+            {movieLoading && (
+              <ActivityIndicator size="large" color="#000ff" />
+            )}
+            {moviesError && (
+              <Text className="text-red-600">Error:{moviesError.message}</Text>
+            )}
+            <Text className='text-white text-lg mt-5 mb-2'>Search Results</Text>
+          </>
+        }
+      />
     </View>
   )
 }
