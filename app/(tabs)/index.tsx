@@ -34,18 +34,18 @@ export default function Index() {
           ) : (
             <View className="flex-1" >
               <SearchBar onPress={() => router.push("/search")} placeholder="Search for a movie" />
-                {
-                  trendingMovies &&(
-                    <View className="mt-10">
-                      <Text className="text-white text-lg mt-5 mb-3">Trending Movies</Text>
-                      <FlatList className="mb-4 mt-3" horizontal  showsHorizontalScrollIndicator={false} data={trendingMovies} renderItem={({item,index})=>(
-                        <Text className="text-white text-sm">{item.title}</Text>
-                      )}
-                      keyExtractor={(item) =>item.movie_id.toString()}
-                      />
-                    </View>
-                  )
-                }
+              {/* {
+                trendingMovies && (
+                  <View className="mt-10">
+                    <Text className="text-white text-lg mt-5 mb-3">Trending Movies</Text>
+                    <FlatList className="mb-4 mt-3" horizontal showsHorizontalScrollIndicator={false} data={trendingMovies} renderItem={({ item, index }) => (
+                      <TrendingCard movie={item} index={index}/>
+                    )}
+                      keyExtractor={(item) => item.movie_id.toString()}
+                    />
+                  </View>
+                )
+              } */}
               <>
                 <Text className="text-white text-lg mt-5 mb-3">Latest Movies</Text>
                 <FlatList
