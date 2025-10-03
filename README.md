@@ -1,3 +1,26 @@
+🎬 Movie Info App
+
+A React Native / Expo app to fetch and display information about movies. You search for a movie and get details like title, synopsis, release date, rating, etc.
+
+🚀 Features
+
+Search any movie by name
+View movie details: synopsis, poster image, release date, ratings, genres
+Responsive and mobile-friendly UI (works on both iOS and Android via Expo)
+Clean architecture: separation of components, services, types/interfaces
+Uses async API calls to fetch data from a movie database API
+TypeScript support for safer coding
+Tailwind / styling utilities for UI consistency
+
+🧰 Tech Stack
+
+Framework: React Native / Expo
+Language: TypeScript & JavaScript
+UI / Styling: Tailwind, custom components
+State / Data Flow: React hooks, context (or local component state)
+API / Services: Fetch calls to movie database API (e.g. TMDB or similar)
+Project Structure: organized into components, services, types, interfaces, etc.
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
